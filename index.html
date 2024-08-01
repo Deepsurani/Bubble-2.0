@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 1300px;
+            height: 500px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        #lbl1 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+        }
+
+        .bubble {
+            height: 50px;
+            width: 50px;
+            /* background-color: pink; */
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            position: absolute;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Get X and Y position of click event</h1>
+    <h2>Click on this box and press a key</h2>
+    <button onclick="btn1Click()" id="btn1">clike here</button>
+    <div id="box1" tabindex="0">
+        <label id="lbl1"></label>
+    </div>
+
+    <script>
+        var cursorX, cursorY;
+        var abcd = "ABCDEFGHIJKLAMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        const colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink", "Brown", "Gray"];
+
+        document.getElementById("box1").addEventListener("mousemove", function (event) {
+            var rect = this.getBoundingClientRect();
+            cursorX = event.clientX - rect.left;
+            cursorY = event.clientY - rect.top;
+            document.getElementById("lbl1").innerHTML = "X: " + cursorX + " Y: " + cursorY;
+        });
+
+        var Timer1 = undefined;
+       
+
+
+            function Timer1Fun() {
+
+                var box = document.getElementById("box1");
+            var newBubble = document.createElement("span");
+            newBubble.className = "bubble";
+
+            var RandomChar = Math.floor(Math.random() * abcd.length);
+            newBubble.innerHTML = abcd[RandomChar];
+
+            var Randomcolor = Math.floor(Math.random() * colors.length);
+            newBubble.style.background = colors[Randomcolor];
+
+            var newpo = Math.floor(Math.random() * (box.clientWidth - 50));
+            newBubble.style.left = newpo + "px";
+            newBubble.style.bottom = 0 + "px";
+            box.appendChild(newBubble);
+
+
+
+       
+
+    var timer = setInterval(function () {
+                var currentBottom = parseInt(newBubble.style.bottom);
+                if (currentBottom >= (box.clientHeight - 50)) { 
+                    clearInterval(timer);
+                    box.removeChild(newBubble);
+                } else {
+                    newBubble.style.bottom = (currentBottom + 1) + "px";
+                }
+            }); 
+        }
+
+        function btn1Click() {
+            if (Timer1 == undefined) {
+                Timer1 = setInterval(Timer1Fun, 100);
+            }
+
+
+
+        }
+
+    </script>
+</body>
+
+</html>

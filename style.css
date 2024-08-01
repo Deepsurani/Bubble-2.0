@@ -1,0 +1,23 @@
+#box1 {
+    width: 1300px;
+    height: 500px;
+    border: 1px solid #000;
+    /* position: relative; */
+}
+
+#lbl1 {
+    /* position: absolute; */
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+}
+
+.bubble {
+    height: 50px;
+    width: 50px;
+    background-color: pink;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+}
